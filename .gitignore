@@ -1,0 +1,10 @@
+# Your resume and applications stay on your computer (includes demo/storage/)
+storage/
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Secrets
+.env

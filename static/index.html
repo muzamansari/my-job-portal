@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Job Portal</title>
+<link rel="icon" href="icon.svg?v=11" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=11">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="brand">
+    <img src="icon.svg?v=11" alt="" class="logo">
+    <span>My Job Portal</span>
+  </div>
+  <nav class="nav">
+    <button class="nav-item active" data-view="dashboard">
+      <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Dashboard</button>
+    <button class="nav-item" data-view="analyze">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>Analyze a Job</button>
+    <button class="nav-item" data-view="resume">
+      <svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg>My Resume</button>
+  </nav>
+  <div class="side-label">Applications</div>
+  <nav class="nav status-nav" id="status-nav"></nav>
+  <div class="side-tip">
+    <b>💡 Pro tip</b>
+    <p>Tailor every CV to the role. Generic CVs get ghosted; tailored ones get callbacks.</p>
+  </div>
+</aside>
+
+<div class="main">
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="search-box">
+      <input id="search" type="search" placeholder="Search your applications by role or company">
+      <span class="search-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+    </div>
+    <button class="btn primary" data-goto="analyze">＋ New job</button>
+    <div class="avatar" id="avatar" title="Your resume">JP</div>
+  </header>
+
+  <!-- DASHBOARD -->
+  <section id="view-dashboard" class="view active">
+    <div class="dash">
+      <div class="dash-main">
+        <div class="hero">
+          <div class="hero-text">
+            <span class="hero-date" id="hero-date"></span>
+            <h1 id="hero-hello">Hi there!</h1>
+            <p>Your job hunt, at a glance.</p>
+            <p class="tagline">✨ Tailored applications. More callbacks.</p>
+          </div>
+          <p class="hero-word" aria-hidden="true">GET<br>HIRED</p>
+          <div class="aura" aria-hidden="true"></div>
+          <span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span><span class="spark s4"></span>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi"><span class="kpi-ico i-red">📁</span><div><b id="k-total">0</b><span>Jobs analysed</span></div></div>
+          <div class="kpi"><span class="kpi-ico i-orange">📨</span><div><b id="k-sent">0</b><span>Applications sent</span></div></div>
+          <div class="kpi"><span class="kpi-ico i-pink">🎤</span><div><b id="k-interviews">0</b><span id="k-rate">Interviews</span></div></div>
+          <div class="kpi"><span class="kpi-ico i-green">🏆</span><div><b id="k-offers">0</b><span>Offers</span></div></div>
+        </div>
+
+        <div class="section-head">
+          <h2><span id="apps-count">0</span> applications</h2>
+          <select id="filter-status"><option value="">All statuses</option></select>
+        </div>
+        <div id="apps-grid" class="job-grid"></div>
+        <p id="apps-empty" class="empty">No jobs yet. Analyze your first one ✨</p>
+      </div>
+
+      <aside class="dash-side">
+        <div class="art-card" aria-hidden="true">
+          <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd3ff"/><stop offset=".45" stop-color="#2a8fe0"/><stop offset="1" stop-color="#1d3fa6"/></linearGradient>
+              <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d99a14"/></linearGradient>
+              <linearGradient id="doc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e3f3ff"/></linearGradient>
+            </defs>
+            <circle cx="240" cy="48" r="70" fill="#ffffff" opacity=".45"/>
+            <circle cx="40" cy="200" r="60" fill="#ffffff" opacity=".35"/>
+            <g>
+              <rect class="rise" x="44" y="132" width="26" height="58" rx="7" fill="url(#bar)" opacity=".75"/>
+              <rect class="rise" x="80" y="108" width="26" height="82" rx="7" fill="url(#bar)" opacity=".85"/>
+              <rect class="rise" x="116" y="84" width="26" height="106" rx="7" fill="url(#bar)"/>
+              <rect class="rise" x="152" y="56" width="26" height="134" rx="7" fill="url(#gold)"/>
+            </g>
+            <path d="M40 150 L93 118 L129 98 L180 46" fill="none" stroke="#0f2460" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 7"/>
+            <g transform="translate(196 74) rotate(6)">
+              <rect width="72" height="92" rx="10" fill="url(#doc)" stroke="#bfe3fb" stroke-width="1.5"/>
+              <rect x="12" y="14" width="30" height="6" rx="3" fill="#1d3fa6"/>
+              <rect x="12" y="28" width="48" height="4" rx="2" fill="#b9dcf5"/>
+              <rect x="12" y="38" width="42" height="4" rx="2" fill="#b9dcf5"/>
+              <rect x="12" y="48" width="46" height="4" rx="2" fill="#b9dcf5"/>
+              <circle cx="52" cy="74" r="13" fill="#16a34a"/>
+              <path d="M46 74l4 4 8-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <path d="M232 34l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#e8b93e"/>
+            <path d="M60 60l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#3fb6f2"/>
+          </svg>
+        </div>
+        <div class="profile-card">
+          <div class="profile-top">
+            <div class="profile-avatar" id="profile-avatar">JP</div>
+            <b id="profile-name">Your profile</b>
+            <span id="profile-sub">Add your resume to begin</span>
+          </div>
+          <div class="profile-body">
+            <div class="meter-row"><span>Average resume fit</span><b id="k-fit">–</b></div>
+            <div class="meter"><i id="fit-bar"></i></div>
+            <div class="meter-row"><span>Average interview chance</span><b id="k-chance">–</b></div>
+            <div class="meter"><i id="chance-bar"></i></div>
+            <ul class="checklist" id="checklist"></ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Pipeline</h2>
+          <div id="pipeline" class="pipeline"></div>
+          <div id="pipeline-legend" class="legend"></div>
+        </div>
+
+        <div class="card">
+          <h2>Applications per week</h2>
+          <div id="weeks" class="weeks"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ANALYZE -->
+  <section id="view-analyze" class="view">
+    <div class="page-head"><h1>Analyze a job</h1><p>See how well your resume fits, then get a CV and cover letter made for the role.</p></div>
+    <div class="card">
+      <h2>1 · Add the job</h2>
+      <p class="hint">Paste the job link and press <b>Fetch</b>, or paste the job description. Some sites (LinkedIn, Indeed) hide the text from tools, so copy and paste it there.</p>
+      <div class="row">
+        <input id="job-url" type="url" placeholder="https://company.com/careers/data-analyst">
+        <button id="btn-fetch" class="btn">🔗 Fetch</button>
+      </div>
+      <textarea id="job-text" rows="12" placeholder="…or paste the full job description here"></textarea>
+      <div class="row end">
+        <span id="jd-count" class="muted">0 characters</span>
+        <button id="btn-analyze" class="btn primary big">🎯 Check my fit</button>
+      </div>
+    </div>
+    <div id="result" class="hidden"></div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="view-resume" class="view">
+    <div class="page-head"><h1>My resume</h1><p>Saved only on this computer and used for every analysis.</p></div>
+    <div class="card">
+      <div class="row">
+        <label class="btn file">📎 Upload PDF, Word or text<input id="resume-file" type="file" accept=".pdf,.docx,.txt,.md" hidden></label>
+        <span id="resume-meta" class="muted"></span>
+      </div>
+      <textarea id="resume-text" rows="24" placeholder="Paste your resume here…"></textarea>
+      <div class="row end"><span class="muted">Check the text after uploading: tables and columns sometimes come out in a different order.</span><button id="btn-save-resume" class="btn primary big">💾 Save resume</button></div>
+    </div>
+  </section>
+</div>
+
+<!-- DETAIL MODAL -->
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="close" id="modal-close" aria-label="Close">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div id="loader" class="loader hidden"><div class="spinner"></div><p id="loader-text">Working…</p></div>
+<div id="toast" class="toast hidden"></div>
+
+<script src="app.js?v=11"></script>
+</body>
+</html>
